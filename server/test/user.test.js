@@ -6,21 +6,21 @@ const userLogin = {
   "email": "bob@email.com",
   "password": "1234",
   "address": "jl. jalan",
-  "postOfficeBox": 15000
+  "postoffice": 15000
 }
 
 const userFail1 = {
   "email": "",
   "password": "1234",
   "address": "jl. jalan",
-  "postOfficeBox": 15000
+  "postoffice": 15000
 }
 
 const userFail2 = {
   "email": "bob@email.com",
   "password": "",
   "address": "jl. jalan",
-  "postOfficeBox": 15000
+  "postoffice": 15000
 }
 
 describe('Login user Testing', () => {
