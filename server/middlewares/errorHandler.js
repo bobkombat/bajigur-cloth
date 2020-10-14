@@ -6,7 +6,7 @@ module.exports = (err, req, res, next) => {
   if (err.name == "SequelizeValidationError")
   {
     statusCode = 400;
-    errorMessage = err.errors.map(x => x.errorMessage);
+    errorMessage = err.errors.map(x => x.message);
     statusMessage = "VALIDATION_ERROR";
   }
   else if (err.statusMessage == "NOT_FOUND")

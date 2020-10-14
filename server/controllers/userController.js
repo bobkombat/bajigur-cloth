@@ -38,8 +38,6 @@ class UserController {
         return User.create(userData);
       })
       .then(response => {
-        console.log('test')
-        console.log(response);
         return res.status(201).json({ id: response.id, email: response.email, password: response.password, address: response.address, postoffice: response.postoffice});
       })
       .catch(err => next(err))

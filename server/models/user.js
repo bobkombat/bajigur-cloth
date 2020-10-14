@@ -62,13 +62,5 @@ module.exports = (sequelize, DataTypes) => {
     user.id = uuidv4();
   })
 
-  User.addHook('beforeBulkCreate', (user, option) => {
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(user.password, salt);
-
-    user.password = hash;
-    user.id = uuidv4();
-  })
-
   return User;
 };

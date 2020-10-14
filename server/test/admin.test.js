@@ -7,6 +7,16 @@ const adminLogin = {
   "password": "1234"
 }
 
+const adminLoginFail1 = {
+  "email": "admin@email.com",
+  "password": "12341"
+}
+
+const adminLoginFail2 = {
+  "email": "admin1@email.com",
+  "password": "12341"
+}
+
 const adminFail1 = {
   "email": "",
   "password": "1234"
@@ -51,8 +61,6 @@ describe('Login Admin Testing', () => {
       .then(response => {
         const { status, body } = response;
 
-        console.log(status, body);
-
         expect(body.errorMessage).toEqual("DATA ADMIN IS NOT FOUND");
         expect(status).toBe(404);
 
@@ -72,10 +80,48 @@ describe('Login Admin Testing', () => {
       .then(response => {
         const { status, body } = response;
 
+        expect(body.errorMessage).toEqual("EMAIL/PASSWORD IS WRONG");
+        expect(status).toBe(401);
+        done();
+      })
+      .catch(done)
+    })
+  })
+
+  describe('Admin login fail', () => {
+    test('failed login wrong email', (done) => {
+      request(app)
+      .post('/admin/login')
+      .send(adminLoginFail1)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .then(response => {
+        const { status, body } = response;
+
         console.log(status, body);
 
         expect(body.errorMessage).toEqual("EMAIL/PASSWORD IS WRONG");
         expect(status).toBe(401);
+        done();
+      })
+      .catch(done)
+    })
+  })
+
+  describe('Admin login fail', () => {
+    test('failed login wrong password', (done) => {
+      request(app)
+      .post('/admin/login')
+      .send(adminLoginFail2)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .then(response => {
+        const { status, body } = response;
+
+        console.log(status, body);
+
+        expect(body.errorMessage).toEqual("DATA ADMIN IS NOT FOUND");
+        expect(status).toBe(404);
         done();
       })
       .catch(done)
