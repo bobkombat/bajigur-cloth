@@ -15,7 +15,7 @@ module.exports = (err, req, res, next) => {
     errorMessage = err.errorMessage;
     statusMessage = err.statusMessage;
   }
-  else if (err.statusMessage == "INVALID_ACCOUNT" || err.name == "JsonWebTokenError")
+  else if (err.statusMessage == "INVALID_ACCOUNT" || err.name == "JsonWebTokenError" || err.statusMessage == "INVALID_SIGNATURE")
   {
     statusCode = 401;
     errorMessage = err.errorMessage;

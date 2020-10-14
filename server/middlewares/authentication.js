@@ -9,16 +9,16 @@ module.exports = (req, res, next) => {
     const dataVerified = jwt.verify(req.headers.access_token, process.env.JWT_SECRET);
 
     if (dataVerified.role == "admin") {
-      Admin.findOne({where: {id: dataVerified.email}})
+      Admin.findOne({where: {id: dataVerified.id}})
         .then(data => {
-          if (!data)
+          if (!data || data == null)
             return next({ statusMessage: "INVALID_SIGNATURE", errorMessage: "INVALID ACCESS TOKEN"})
           req.userLogin = dataVerified;
-          next()
+          return next()
         })
         .catch(err => next(err))
     } else {
-      User.findOne({where: {id: dataVerified.email}})
+      User.findOne({where: {id: dataVerified.id}})
         .then(data => {
           if (!data)
             return next({ statusMessage: "INVALID_SIGNATURE", errorMessage: "INVALID ACCESS TOKEN"});

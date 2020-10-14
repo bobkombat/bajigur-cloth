@@ -47,7 +47,15 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     address: DataTypes.STRING,
-    postoffice: DataTypes.INTEGER
+    postoffice: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isInt: {
+          args: true,
+          msg: "postoffice must be an integer"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'User',

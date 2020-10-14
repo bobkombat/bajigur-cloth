@@ -69,7 +69,6 @@ describe('Register user testing', () => {
       .then(response => {
         const { status, body } = response;
 
-        console.log(status, body);
         expect(body.statusMessage).toEqual('VALIDATION_ERROR');
         expect(status).toBe(400);
 
@@ -106,7 +105,6 @@ describe('Register user testing', () => {
       .then(response => {
         const { status, body } = response;
 
-        console.log(status, body);
         expect(body.errorMessage).toEqual("ACCOUNT ALREADY EXIST");
         expect(status).toBe(401);
 

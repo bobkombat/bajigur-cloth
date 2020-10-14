@@ -98,8 +98,6 @@ describe('Login Admin Testing', () => {
       .then(response => {
         const { status, body } = response;
 
-        console.log(status, body);
-
         expect(body.errorMessage).toEqual("EMAIL/PASSWORD IS WRONG");
         expect(status).toBe(401);
         done();
@@ -117,8 +115,6 @@ describe('Login Admin Testing', () => {
       .expect('Content-Type', /json/)
       .then(response => {
         const { status, body } = response;
-
-        console.log(status, body);
 
         expect(body.errorMessage).toEqual("DATA ADMIN IS NOT FOUND");
         expect(status).toBe(404);

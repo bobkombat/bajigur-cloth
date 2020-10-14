@@ -42,8 +42,8 @@ class ProductController {
       image_url: req.body.image_url,
       price: +req.body.price,
       stock: +req.body.stock,
-      description: req.body.description || null,
-      tags: req.body.tags || null
+      description: req.body.description,
+      tags: req.body.tags
     }
 
     Product.update(productData, {where: {id: req.params.id}, returning: true})
@@ -60,13 +60,13 @@ class ProductController {
 
     Product.findOne({where: {id: req.params.id}})
       .then(data => {
-        if (!data)
-          return next({ statusMessage: "NOT_FOUND", errorMessage: "DATA PRODUCT IS NOT FOUND"});
         productDeleted = data;
-        return Product.delete({where: {id: req.params.id}})
+        return Product.destroy({where: {id: req.params.id}})
       })
       .then(response => {
-        res.status(200).json(productDeleted);
+        if (!productDeleted)
+          return next({ statusMessage: "NOT_FOUND", errorMessage: "DATA PRODUCT IS NOT FOUND"});
+        return res.status(200).json(productDeleted);
       })
       .catch(err => next(err))
   }
