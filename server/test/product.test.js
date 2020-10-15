@@ -7,6 +7,7 @@ let access_token;
 const fakeAccess_token1 = 'awdnwadinawd';
 const fakeAccess_token2 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE2YWI4YWUzLTUzOGEtNGY2MC05MTYxLWM0ZjBjYjUxYTQ1OSIsIm5hbWUiOiJKb2huIERvZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTUxNjIzOTAyMn0.6KAZA0HTGuOe_kw3ubZOaDU-gaa-Wv_xLwM1XS299iU';
 const fakeAccess_token3 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJvYiIsIm5hbWUiOiJKb2huIERvZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTUxNjIzOTAyMn0.Anhpo3jq4xN8PN_fYJaJpT9Q0QaQzPIFhhGyffWFXks';
+const fakeAccess_token4 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE2YWI4YWUzLTUzOGEtNGY2MC05MTYxLWM0ZjBjYjUxYTQ1OSIsIm5hbWUiOiJKb2huIERvZSIsInJvbGUiOiJhd2QiLCJpYXQiOjE1MTYyMzkwMjJ9._nHRU9dc-ZrvRarlY9rpAlQ266rhjhq3ugYsik_CIcs';
 
 let productId;
 
@@ -192,6 +193,26 @@ describe('POST new product', () => {
         expect(status).toBe(500);
         expect(body.statusMessage).toEqual('INTERNAL_SERVER_ERROR');
         expect(body.errorMessage).toEqual('INTERNAL_SERVER_ERROR');
+
+        done();
+      })
+    })
+  })
+
+  describe('failed post new product', () => {
+    test('fake access_token 4', done => {
+      request(app)
+      .post('/product')
+      .send()
+      .set('access_token', fakeAccess_token4)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .then(response => {
+        const { body, status } = response;
+
+        expect(status).toBe(401);
+        expect(body.statusMessage).toEqual('INVALID_SIGNATURE');
+        expect(body.errorMessage).toEqual('INVALID ACCESS TOKEN');
 
         done();
       })

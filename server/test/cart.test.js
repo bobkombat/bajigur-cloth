@@ -214,3 +214,142 @@ describe('GET cart', () => {
     })
   })
 })
+
+describe('PUT cart', () => {
+
+  describe('failed put new cart', () => {
+    test('failed to find product', done => {
+      request(app)
+        .put(`/user/cart/gvvivkvi`)
+        .send({})
+        .set("Accept", "application/json")
+        .set('access_token', access_token)
+        .expect("Content-Type", /json/)
+        .then(response => {
+          const { body, status } = response;
+
+          expect(body.statusMessage).toEqual('INTERNAL_SERVER_ERROR');
+          expect(status).toBe(500);
+          done();
+        })
+        .catch(err => done())
+    })
+  })
+
+  describe('failed put new cart', () => {
+    test('failed to find product', done => {
+      request(app)
+        .put(`/user/cart/${productId.slice(0, productId.length - 1) + "0"}`)
+        .send({})
+        .set("Accept", "application/json")
+        .set('access_token', access_token)
+        .expect("Content-Type", /json/)
+        .then(response => {
+          const { body, status } = response;
+
+          expect(body.statusMessage).toEqual('NOT_FOUND');
+          expect(status).toBe(404);
+          done();
+        })
+        .catch(err => done())
+    })
+  })
+
+  describe('failed put new cart', () => {
+    test('fail to put cart', done => {
+      request(app)
+        .put(`/user/cart/${productId}`)
+        .send({ quantity: -1 })
+        .set("Accept", "application/json")
+        .set('access_token', access_token)
+        .expect("Content-Type", /json/)
+        .then(response => {
+          const { body, status } = response;
+
+          expect(body.statusMessage).toEqual('VALIDATION_ERROR');
+          expect(status).toBe(400);
+          done();
+        })
+        .catch(err => done())
+    })
+  })
+
+  describe('failed put new cart', () => {
+    test('fail to put cart', done => {
+      request(app)
+        .put(`/user/cart/${productId}`)
+        .send({ quantity: 1000 })
+        .set("Accept", "application/json")
+        .set('access_token', access_token)
+        .expect("Content-Type", /json/)
+        .then(response => {
+          const { body, status } = response;
+
+          expect(body.statusMessage).toEqual('BAD_REQUEST');
+          expect(status).toBe(400);
+          done();
+        })
+        .catch(err => done())
+    })
+  })
+})
+
+describe('DELETE cart', () => {
+
+  describe('failed delete cart', () => {
+    test('failed to find product', done => {
+      request(app)
+        .delete(`/user/cart/gvvivkvi`)
+        .send({})
+        .set("Accept", "application/json")
+        .set('access_token', access_token)
+        .expect("Content-Type", /json/)
+        .then(response => {
+          const { body, status } = response;
+
+          expect(body.statusMessage).toEqual('INTERNAL_SERVER_ERROR');
+          expect(status).toBe(500);
+          done();
+        })
+        .catch(err => done())
+    })
+  })
+
+  describe('failed delete cart', () => {
+    test('failed to find product', done => {
+      request(app)
+        .delete(`/user/cart/${cartId.slice(0, cartId.length - 1) + "0"}`)
+        .send({})
+        .set("Accept", "application/json")
+        .set('access_token', access_token)
+        .expect("Content-Type", /json/)
+        .then(response => {
+          const { body, status } = response;
+
+          expect(body.statusMessage).toEqual('NOT_FOUND');
+          expect(status).toBe(404);
+          done();
+        })
+        .catch(err => done())
+    })
+  })
+
+  describe('failed delete cart', () => {
+    test('failed to find product', done => {
+      request(app)
+        .delete(`/user/cart/${cartId}`)
+        .send({})
+        .set("Accept", "application/json")
+        .set('access_token', access_token)
+        .expect("Content-Type", /json/)
+        .then(response => {
+          const { body, status } = response;
+
+          expect(body.id).toEqual(cartId);
+          expect(status).toBe(200);
+          done();
+        })
+        .catch(err => done())
+    })
+  })
+})
