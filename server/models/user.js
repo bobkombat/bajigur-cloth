@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.belongsToMany(models.Product, {through: models.Cart});
+      User.hasMany(models.Cart);
     }
   };
   User.init({
@@ -63,7 +64,6 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.addHook('beforeCreate', (user, option) => {
-    console.log(user, 'in models')
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(user.password, salt);
 

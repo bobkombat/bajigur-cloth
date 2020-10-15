@@ -4,7 +4,6 @@ const { Admin } = require('../models');
 
 class AdminUserController {
   static login(req, res, next) {
-    console.log(req.body.email, req.body.password);
 
     if (!req.body.email)
       return next({ statusMessage: "NOT_FOUND", errorMessage: "DATA ADMIN IS NOT FOUND"});

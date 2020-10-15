@@ -7,10 +7,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
-      product_id: {
+      ProductId: {
         type: Sequelize.UUID
       },
-      user_id: {
+      UserId: {
         type: Sequelize.UUID
       },
       quantity: {

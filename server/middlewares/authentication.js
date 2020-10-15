@@ -20,10 +20,12 @@ module.exports = (req, res, next) => {
     } else {
       User.findOne({where: {id: dataVerified.id}})
         .then(data => {
-          if (!data)
+          if (!data || data == null)
             return next({ statusMessage: "INVALID_SIGNATURE", errorMessage: "INVALID ACCESS TOKEN"});
-          req.userLogin = dataVerified;
-          next();
+          else {
+            req.userLogin = dataVerified;
+            return next();
+          }
         })
         .catch(err => next(err))
     }

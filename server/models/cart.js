@@ -13,10 +13,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Cart.belongsTo(models.User);
+      Cart.belongsTo(models.Product);
     }
   };
   Cart.init({
-    product_id: {
+    id: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
+    ProductId: {
       type: DataTypes.UUID,
       allowNull: false,
       validate: {
@@ -26,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    user_id: {
+    UserId: {
       type: DataTypes.UUID,
       allowNull: false,
       validate: {

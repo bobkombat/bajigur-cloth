@@ -9,9 +9,9 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
      await queryInterface.addConstraint('Carts', {
-       fields: ['product_id'],
+       fields: ['ProductId'],
        type: 'foreign key',
-       name: 'custom_fkey_product_id',
+       name: 'custom_fkey_ProductId',
        references: { //Required field
         table: 'Products',
         field: 'id'
@@ -20,9 +20,9 @@ module.exports = {
        onUpdate: 'cascade'
      })
      await queryInterface.addConstraint('Carts', {
-       fields: ['user_id'],
+       fields: ['UserId'],
        type: 'foreign key',
-       name: 'custom_fkey_user_id',
+       name: 'custom_fkey_UserId',
        references: { //Required field
         table: 'Users',
         field: 'id'
@@ -39,7 +39,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-     await queryInterface.removeConstraint('Carts', "custom_fkey_product_id");
-     await queryInterface.removeConstraint('Carts', "custom_fkey_user_id");
+     await queryInterface.removeConstraint('Carts', "custom_fkey_ProductId");
+     await queryInterface.removeConstraint('Carts', "custom_fkey_UserId");
   }
 };
