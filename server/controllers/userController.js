@@ -15,7 +15,7 @@ class UserController {
           return next({ statusMessage: "NOT_FOUND", errorMessage: "DATA USER IS NOT FOUND"});
 
         if (bcrypt.compareSync(req.body.password, data.password)) {
-          const access_token = jwt.sign({ id: data.id, email: data.email, address: data.address, postoffice: data.postoffice }, process.env.JWT_SECRET);
+          const access_token = jwt.sign({ id: data.id, email: data.email, address: data.address, postoffice: data.postoffice, role: 'user' }, process.env.JWT_SECRET);
           return res.status(200).json({ access_token });
         }
         return next({ statusMessage: "INVALID_ACCOUNT", errorMessage: "EMAIL/PASSWORD IS WRONG"});

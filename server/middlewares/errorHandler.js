@@ -21,6 +21,12 @@ module.exports = (err, req, res, next) => {
     errorMessage = err.errorMessage;
     statusMessage = err.statusMessage || "INVALID_SIGNATURE";
   }
+  else if (err.statusMessage == "BAD_REQUEST")
+  {
+    statusCode = 400;
+    errorMessage = err.errorMessage;
+    statusMessage = err.statusMessage;
+  }
 
   return res.status(statusCode).json({ errorMessage, statusMessage })
 }
