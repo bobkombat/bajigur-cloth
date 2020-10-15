@@ -53,6 +53,7 @@ beforeAll((done) => {
 afterAll((done) => {
   queryInterface.bulkDelete("Users", null, {});
   queryInterface.bulkDelete("Products", null, {});
+  queryInterface.bulkDelete("Carts", null, {});
   done();
 });
 
