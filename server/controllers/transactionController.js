@@ -37,7 +37,6 @@ class TransactionController {
 
     Cart.findAll({ where: { UserId: req.userLogin.id }, include: [{model: Product}] })
       .then((data) => {
-        console.log(data);
         if (data.length > 0) {
           cartData = data;
 

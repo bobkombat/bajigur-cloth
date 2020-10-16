@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: "name is empty"
         },
-        isEmpty: {
+        notEmpty: {
           args: true,
           msg: "name is empty"
         }
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: "image url is empty"
         },
-        isEmpty: {
+        notEmpty: {
           args: true,
           msg: "image url is empty"
         }

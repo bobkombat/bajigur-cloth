@@ -4,11 +4,11 @@ const authentication = require('../middlewares/authentication.js');
 const authorization = require('../middlewares/authorization.js');
 
 router.get('/', BannerController.viewAll);
-router.post('/:id', BannerController.viewOne);
+router.get('/:id', BannerController.viewOne);
 
 router.use(authentication, authorization);
 
-router.post('/:id', BannerController.create);
+router.post('/', BannerController.create);
 router.put('/:id', BannerController.update);
 router.delete('/:id', BannerController.destroy);
 
