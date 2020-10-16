@@ -13,11 +13,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      TransactionHistory.belongsTo(models.TransactionInvoice);
+      TransactionHistory.belongsTo(models.Product);
     }
   };
   TransactionHistory.init({
     id: {
-      allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID
     },
@@ -52,7 +53,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   TransactionHistory.addHook('beforeBulkCreate', (transaction, option) => {
-    transaction.id = uuidv4();
+    if (transaction.length > 0) {
+      transaction = transaction.map(x => x.id = uuidv4());
+    } else {
+      transaction.id = uuidv4();
+    }
   });
 
   return TransactionHistory;

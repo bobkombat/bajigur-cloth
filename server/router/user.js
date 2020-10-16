@@ -19,7 +19,7 @@ router.get('/wishlist', WishlistController.viewAll);
 router.post('/wishlist/:product_id', WishlistController.create);
 router.delete('/wishlist/:product_id', WishlistController.destroy);
 
-router.get('/transaction/history', TransactionController.viewAll);
+router.get('/transaction/history', TransactionController.viewUserTransaction);
 router.post('/transaction/checkout', TransactionController.create);
 
 module.exports = router;

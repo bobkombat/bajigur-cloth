@@ -13,11 +13,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      TransactionInvoice.belongsTo(models.User);
+
+      TransactionInvoice.belongsToMany(models.Product, {through: models.TransactionHistory});
+      TransactionInvoice.hasMany(models.TransactionHistory);
     }
   };
   TransactionInvoice.init({
     id: {
-      allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID
     },
