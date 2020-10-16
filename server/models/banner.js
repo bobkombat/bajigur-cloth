@@ -1,4 +1,6 @@
 'use strict';
+const { v4: uuidv4 } = require('uuid');
+
 const {
   Model
 } = require('sequelize');
@@ -14,12 +16,43 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Banner.init({
-    name: DataTypes.STRING,
-    image_url: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "name is empty"
+        },
+        isEmpty: {
+          args: true,
+          msg: "name is empty"
+        }
+      }
+    },
+    image_url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "image url is empty"
+        },
+        isEmpty: {
+          args: true,
+          msg: "image url is empty"
+        }
+      }
+    },
     expired: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Banner',
   });
+
+  Banner.addHook('beforeCreate', (banner, option) => {
+    banner.id = uuidv4();
+  })
+
   return Banner;
 };
