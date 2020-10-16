@@ -59,7 +59,11 @@ class AdminUserController {
       where: { id: req.params.id },
       attributes: { exclude: ["password"] },
     })
-      .then((data) => res.status(200).json(data))
+      .then((data) => {
+        if (data)
+          return res.status(200).json(data)
+        return next({ statusMessage: "NOT_FOUND", errorMessage: "USER DATA NOT FOUND"})
+      })
       .catch((err) => next(err));
   }
 
