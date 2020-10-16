@@ -2,6 +2,8 @@ const app = require('../app.js');
 const jwt = require('jsonwebtoken');
 const request = require('supertest');
 
+let access_token;
+
 const adminLogin = {
   "email": "admin@email.com",
   "password": "1234"
