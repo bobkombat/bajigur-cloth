@@ -2,7 +2,7 @@ const { Cart, Product } = require('../models');
 
 class CartController {
   static viewAll(req, res, next) {
-    Cart.findAll({where: {UserId: req.userLogin.id}, include: ['Product']})
+    Cart.findAll({where: {UserId: req.userLogin.id}, include: [{model: Product}]})
       .then(data => {
         return res.status(200).json(data);
       })
@@ -21,7 +21,7 @@ class CartController {
       })
       .catch(err => next(err))
 
-    Cart.findOne({where: {UserId: req.userLogin.id, ProductId: req.params.product_id}, include: ['Product']})
+    Cart.findOne({where: {UserId: req.userLogin.id, ProductId: req.params.product_id}, include: [{model: Product}]})
       .then(data => {
         if (data) {
           const totalQuantity = quantity + data.quantity;
@@ -49,7 +49,7 @@ class CartController {
   static update(req, res, next) {
     const { quantity } = req.body;
 
-    Cart.findOne({where: {UserId: req.userLogin.id, ProductId: req.params.product_id}, include: ['Product']})
+    Cart.findOne({where: {UserId: req.userLogin.id, ProductId: req.params.product_id}, include: [{model: Product}]})
       .then(data => {
         if (data) {
           const totalQuantity = quantity + data.quantity;

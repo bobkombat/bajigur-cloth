@@ -35,10 +35,10 @@ class TransactionController {
   static create(req, res, next) {
     let cartData, totalCartAmount, TransactionInvoiceId, transactionData;
 
-    Cart.findAll({ where: { UserId: req.userLogin.id }, include: ["Product"] })
+    Cart.findAll({ where: { UserId: req.userLogin.id }, include: [{model: Product}] })
       .then((data) => {
         console.log(data);
-        if (data) {
+        if (data.length > 0) {
           cartData = data;
 
           totalCartAmount = cartData.reduce(
@@ -50,6 +50,9 @@ class TransactionController {
             UserId: req.userLogin.id,
             total_amount: totalCartAmount,
           });
+        } else {
+          console.log('masuk sini');
+          return next({ statusMessage: "BAD_REQUEST", errorMessage: "CART IS EMPTY"});
         }
       })
       .then((response1) => {
@@ -59,11 +62,13 @@ class TransactionController {
           TransactionInvoiceId: TransactionInvoiceId,
           ProductId: x.ProductId,
           total_amount: x.quantity * x.Product.price,
+          quantity: x.quantity
         }));
 
         return Promise.all([
           TransactionHistory.bulkCreate(transactionData),
           Cart.destroy({ where: { UserId: req.userLogin.id } }),
+          ...cartData.map(x => Product.update({quantity: x.Product.stock - x.quantity}, {where: {id: x.ProductId}}))
         ]);
       })
       .then((response2) => {

@@ -28,6 +28,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-     await queryInterface.removeConstraint('TransactionInvoinces', 'custom_fkey_UserId');
+     await queryInterface.removeConstraint('TransactionInvoices', 'custom_fkey_UserId');
   }
 };

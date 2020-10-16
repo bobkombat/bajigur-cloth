@@ -52,8 +52,8 @@ const userFail4 = {
   "password": "12341"
 }
 
-afterAll(done => {
-  queryInterface.bulkDelete('Users', null, {});
+afterAll(async done => {
+  await queryInterface.bulkDelete('Users', null, {});
   done();
 })
 

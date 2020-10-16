@@ -24,35 +24,34 @@ beforeAll((done) => {
     })
     .then(response => {
       access_token = response.body.access_token;
+
+      return request(app)
+        .post("/admin/login")
+        .send({ email: "admin@email.com", password: "1234" })
+        .set("Accept", "application/json")
+        .expect("Content-Type", /json/)
+    })
+    .then((response) => {
+      adminAccess_token = response.body.access_token;
+
+      return request(app)
+        .post("/product")
+        .send({ name: "baju", image_url: "oiawndiwd", price: 1, stock: 99 })
+        .set("Accept", "application/json")
+        .set('access_token', adminAccess_token)
+        .expect("Content-Type", /json/);
+    })
+    .then(response => {
+      productId = response.body.id;
+      done()
     })
     .catch((err) => done());
-
-    request(app)
-      .post("/admin/login")
-      .send({ email: "admin@email.com", password: "1234" })
-      .set("Accept", "application/json")
-      .expect("Content-Type", /json/)
-      .then((response) => {
-        adminAccess_token = response.body.access_token;
-
-        return request(app)
-          .post("/product")
-          .send({ name: "baju", image_url: "oiawndiwd", price: 1, stock: 99 })
-          .set("Accept", "application/json")
-          .set('access_token', adminAccess_token)
-          .expect("Content-Type", /json/);
-      })
-      .then(response => {
-        productId = response.body.id;
-        done()
-      })
-      .catch((err) => done());
 });
 
-afterAll((done) => {
-  queryInterface.bulkDelete("Users", null, {});
-  queryInterface.bulkDelete("Products", null, {});
-  queryInterface.bulkDelete("Wishlists", null, {});
+afterAll(async (done) => {
+  await queryInterface.bulkDelete("Users", null, {});
+  await queryInterface.bulkDelete("Products", null, {});
+  await queryInterface.bulkDelete("Wishlists", null, {});
   done();
 });
 

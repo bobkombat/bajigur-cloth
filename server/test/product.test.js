@@ -55,8 +55,8 @@ beforeAll(done => {
   .catch(err => done())
 })
 
-afterAll(done => {
-  queryInterface.bulkDelete('Products', null, {});
+afterAll(async done => {
+  await queryInterface.bulkDelete('Products', null, {});
   done();
 })
 

@@ -2,7 +2,7 @@ const { Wishlist, Product } = require('../models');
 
 class WishlistController {
   static viewAll(req, res, next) {
-    Wishlist.findAll({where: {UserId: req.userLogin.id}, include: ['Product']})
+    Wishlist.findAll({where: {UserId: req.userLogin.id}, include: [{model: Product}]})
       .then(data => {
         return res.status(200).json(data);
       })
