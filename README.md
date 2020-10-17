@@ -1,6 +1,8 @@
 # bajigur-cloth
 
 ### Built using: PostgreSQL, Express.js, Node.js
+Check out the API-DOC.md to see all the route
+
   ## Feature added:
   #### Feature for User:
     - Login/Register for User
