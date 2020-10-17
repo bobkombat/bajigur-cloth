@@ -8,15 +8,21 @@ List of available endpoint:
   - `GET /admin/users/:id/cart`
   - `GET /admin/users/:id/transaction`
   
+  
+  
   - `POST /product`
   - `GET /product`
   - `PUT /product/:id`
   - `DELETE /product/:id`
   
+  
+  
   - `POST /banner`
   - `GET /banner`
   - `PUT /banner/:id`
   - `DELETE /banner/:id`
+  
+  
   
   - `POST /user/login`
   - `POST /user/register`
