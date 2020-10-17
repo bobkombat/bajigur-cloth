@@ -42,4 +42,4 @@ $ npm run start
 ```
 
 ## How I work on this project
-
+I started this project by deciding which database should I choose, it's between PostgreSQL or MongoDB and so I decided to pick PostgreSQL because there's not much going on with the data that need changes. After that, I need to decide how many features or tables and attributes in each table that I need create, It's one of the more demanding task to decide whether I need to add the attributes or not.
