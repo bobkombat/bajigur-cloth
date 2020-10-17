@@ -42,4 +42,6 @@ $ npm run start
 ```
 
 ## How I work on this project
-I started this project by deciding which database should I choose, it's between PostgreSQL or MongoDB and so I decided to pick PostgreSQL because there's not much going on with the data that need changes. After that, I need to decide how many features or tables and attributes in each table that I need create, It's one of the more demanding task to decide whether I need to add the attributes or not.
+I started this project by deciding which database should I choose, it's between PostgreSQL or MongoDB and so I decided to pick PostgreSQL because there's not much going on with the data that need changes. After that, I need to decide how many features or tables and attributes in each table that I need create, it's one of the more demanding task to decide whether I need to add the attributes or not.
+
+Now comes the part that I actually writing the code, it started as usual I setup the project, installing all the dependencies, building the project folder using MVC and stuff like that. The way that I thinking when I'm writing is I need to build a strong bare minimum that is fully working and it's outlining all the stuff that will be used later on and after I build it, I could build or make changes on top of that more easily without needing to change a lot of stuff without breaking so many things. This part is quite tricky to be honest, because I don't know if the framework of the project that's been working on is fully working or not, but eventually it's working properly.
